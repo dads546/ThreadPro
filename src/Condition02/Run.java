@@ -1,7 +1,7 @@
 package Condition02;
 
 /**
-
+ * 注意 : 在lock最终结束的时候要再finally中Unlock
  * @author songxilong
  *
  */

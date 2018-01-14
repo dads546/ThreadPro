@@ -25,6 +25,7 @@ public class TestGetWaitQueueLength {
 			Thread.sleep(1000);
 			System.out.println("调用了await的数量为"+service.getWaitQueueLength());
 			System.out.println("请求lock的数量为"+service.getQueueLength());
+			System.out.println("是否有线程在等待condition"+service.hasWaiters());
 			service.signalAll();
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {

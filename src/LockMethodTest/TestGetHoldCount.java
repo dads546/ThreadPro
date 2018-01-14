@@ -1,6 +1,7 @@
 package LockMethodTest;
 
 import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -19,12 +20,11 @@ public class TestGetHoldCount {
 		}
 }
 class Service{
-	private ReentrantLock lock = new ReentrantLock();
-	private Condition c = lock.newCondition();
+	public static ReentrantLock lock = new ReentrantLock();
+	public static Condition c = lock.newCondition();
 	public void method1() {
-		lock.lock();
-		lock.lock();
 		try {
+			lock.lock();
 			Thread.sleep(Integer.MAX_VALUE);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
@@ -85,5 +85,15 @@ class Service{
 			lock.unlock();
 		}
 		return result;
+	}
+	
+	public Lock getLock() {
+		return this.lock;
+	}
+
+	public boolean hasWaiters() {
+		lock.lock();
+		// TODO Auto-generated method stub
+		return lock.hasWaiters(c);
 	}
 }
